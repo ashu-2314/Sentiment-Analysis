@@ -1,0 +1,28 @@
+/* Background */
+.stApp {
+    background: linear-gradient(to right, #141e30, #243b55);
+    color: white;
+}
+
+/* Text Area */
+textarea {
+    border-radius: 12px !important;
+}
+
+/* Button */
+.stButton button {
+    background-color: #00c6ff;
+    color: white;
+    border-radius: 10px;
+    height: 50px;
+    width: 200px;
+    font-size: 18px;
+}
+
+/* Result Card */
+.result-box {
+    padding: 20px;
+    border-radius: 15px;
+    background-color: rgba(255,255,255,0.1);
+    margin-top: 20px;
+}
