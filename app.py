@@ -182,12 +182,41 @@ textarea {
 /* ---------------- RESULT BOX ---------------- */
 
 .result-box {
-    padding: 30px;
-    border-radius: 24px;
-    margin-top: 25px;
+
+    padding: 35px;
+
+    border-radius: 28px;
+
+    margin-top: 30px;
+
     color: white;
+
     text-align: center;
+
     animation: fadeIn 0.7s ease-in-out;
+
+    backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+
+    transition: 0.4s ease;
+}
+
+.result-box:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow: 0 14px 45px rgba(0,0,0,0.45);
+}
+
+.result-box h1 {
+
+    text-shadow:
+        0 0 12px rgba(255,255,255,0.25);
+
+    letter-spacing: 1px;
 }
 
 /* ---------------- ANIMATION ---------------- */
@@ -378,26 +407,39 @@ if st.button("🚀 Analyze Sentiment"):
             # Positive Result
             if prediction == "positive":
 
-                bg_color = "linear-gradient(135deg,#16a34a,#14532d)"
+                bg_color = """
+                    linear-gradient(
+                    135deg,
+                    rgba(22,163,74,0.95),
+                    rgba(21,128,61,0.88)
+                    )
+                    """
 
                 st.markdown(f"""
                 <div class="result-box"
                      style="background-color:{bg_color};">
-                    <h2>😊 Positive Sentiment</h2>
-                    <h3>Confidence: {confidence:.2f}%</h3>
+                    <h1 style="font-size:48px; margin-bottom:10px;">😊 Positive Sentiment</h1>
+
+                    <h2 style= "font-size:34px; margin-top:15px;">Confidence: {confidence:.2f}%</h2>
                 </div>
                 """, unsafe_allow_html=True)
 
             # Negative Result
             else:
 
-                bg_color = "linear-gradient(135deg,#dc2626,#7f1d1d)"
+                bg_color = """
+                    linear-gradient(
+                    135deg,
+                    rgba(220,38,38,0.95),
+                    rgba(127,29,29,0.88)
+                    )
+                    """
 
                 st.markdown(f"""
                 <div class="result-box"
-                     style="background-color:{bg_color};">
-                    <h2>😠 Negative Sentiment</h2>
-                    <h3>Confidence: {confidence:.2f}%</h3>
+                    style="background-color:{bg_color};">
+                    <h1 style="font-size:48px; margin-bottom:10px; "> 😠 Negative Sentiment </h1>
+                    <h2 style="font-size:34px; margin-top:15px; ">Confidence: {confidence:.2f}%</h2>
                 </div>
                 """, unsafe_allow_html=True)
 
