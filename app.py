@@ -70,64 +70,168 @@ def clean_text(text):
 
     return " ".join(processed_words)
 
-# ---------------- CUSTOM CSS ----------------
 st.markdown("""
 <style>
 
+/* ---------------- MAIN APP ---------------- */
+
 .stApp {
-    background: linear-gradient(to right, #141e30, #243b55);
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e3a5f,
+        #0f172a
+    );
     color: white;
+    font-family: 'Segoe UI', sans-serif;
 }
+
+/* ---------------- SIDEBAR ---------------- */
+
+section[data-testid="stSidebar"] {
+    background: rgba(15, 23, 42, 0.95);
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ---------------- TITLE ---------------- */
 
 h1 {
     text-align: center;
-    color: #00c6ff;
-    animation: glow 2s ease-in-out infinite alternate;
+    color: #ffffff;
+    font-size: 58px !important;
+    font-weight: 700;
+    text-shadow: 0px 0px 25px rgba(0,198,255,0.9);
+    margin-bottom: 10px;
 }
 
-@keyframes glow {
-    from {
-        text-shadow: 0 0 10px #00c6ff;
-    }
-    to {
-        text-shadow: 0 0 20px #0072ff;
-    }
+/* ---------------- SUBTEXT ---------------- */
+
+.subtext {
+    text-align: center;
+    font-size: 20px;
+    color: #d1d5db;
+    margin-bottom: 40px;
 }
 
-.stTextArea textarea {
-    border-radius: 15px;
-    background-color: #1e1e1e;
-    color: white;
+/* ---------------- GLASS CARD ---------------- */
+
+.glass-card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(14px);
+    border-radius: 22px;
+    padding: 25px;
+    margin-top: 25px;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
-.stButton button {
-    background: linear-gradient(to right, #00c6ff, #0072ff);
-    color: white;
-    border-radius: 12px;
-    height: 50px;
-    width: 250px;
-    font-size: 18px;
+/* ---------------- TEXT AREA ---------------- */
+
+textarea {
+    background-color: rgba(0,0,0,0.45) !important;
+    color: white !important;
+    border-radius: 18px !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    font-size: 18px !important;
+}
+
+/* ---------------- BUTTON ---------------- */
+
+.stButton > button {
+    width: 100%;
+    border-radius: 16px;
+    height: 60px;
     border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(
+        90deg,
+        #00c6ff,
+        #0072ff
+    );
+    transition: 0.3s ease;
+    box-shadow: 0 6px 18px rgba(0,114,255,0.4);
 }
+
+.stButton > button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(0,198,255,0.7);
+}
+
+/* ---------------- RESULT BOX ---------------- */
 
 .result-box {
+    padding: 30px;
+    border-radius: 24px;
+    margin-top: 25px;
+    color: white;
+    text-align: center;
+    animation: fadeIn 0.7s ease-in-out;
+}
+
+/* ---------------- ANIMATION ---------------- */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+/* ---------------- METRICS ---------------- */
+
+[data-testid="metric-container"] {
+    background: rgba(255,255,255,0.07);
+    border-radius: 18px;
+    padding: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ---------------- FOOTER ---------------- */
+
+.footer {
+    text-align: center;
+    margin-top: 60px;
     padding: 20px;
-    border-radius: 15px;
-    margin-top: 20px;
+    color: #d1d5db;
+    font-size: 16px;
+}
+
+/* ---------------- SCROLLBAR ---------------- */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00c6ff;
+    border-radius: 10px;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
 # ---------------- TITLE ----------------
-st.title("🎭 AI Sentiment Analysis System")
+st.markdown("""
+<h1>🎭 AI Sentiment Analysis System</h1>
+<p class="subtext">
+Analyze reviews using AI + Machine Learning
+</p>
+""", unsafe_allow_html=True)
 
 st.write("Analyze reviews using AI + Machine Learning")
+st.markdown('<div class="glass-card">', unsafe_allow_html=True)
 col1, col2, col3 = st.columns(3)
 
 col1.metric("Model", "Logistic Regression")
 col2.metric("Dataset", "IMDB 50K")
 col3.metric("Accuracy", "89%")
+st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------------- SIDEBAR ----------------
 st.sidebar.title("⚙ Features")
@@ -143,6 +247,7 @@ uploaded_file = st.sidebar.file_uploader(
 )
 
 # ---------------- VOICE INPUT ----------------
+st.markdown('<div class="glass-card">', unsafe_allow_html=True)
 review = ""
 
 if voice_option:
@@ -191,6 +296,8 @@ if voice_option:
 
             st.error(f"Speech recognition failed: {e}")
 
+st.markdown('</div>', unsafe_allow_html=True)
+
 # ---------------- TEXT AREA ----------------
 review = st.text_area(
     "Enter Your Review",
@@ -223,7 +330,7 @@ if st.button("🚀 Analyze Sentiment"):
             # Positive Result
             if prediction == "positive":
 
-                bg_color = "#14532d"
+                bg_color = "linear-gradient(135deg,#16a34a,#14532d)"
 
                 st.markdown(f"""
                 <div class="result-box"
@@ -236,7 +343,7 @@ if st.button("🚀 Analyze Sentiment"):
             # Negative Result
             else:
 
-                bg_color = "#7f1d1d"
+                bg_color = "linear-gradient(135deg,#dc2626,#7f1d1d)"
 
                 st.markdown(f"""
                 <div class="result-box"
@@ -328,3 +435,10 @@ if uploaded_file is not None:
 Built with ❤️ using Python, NLP & Machine Learning
 </center>
 """, unsafe_allow_html=True)
+        
+st.markdown("""
+<div class="footer">
+    🚀 Built with Python, NLP, Streamlit & Machine Learning <br>
+    Designed & Developed by Ashrita
+</div>
+""", unsafe_allow_html=True)       
