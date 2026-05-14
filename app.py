@@ -266,13 +266,13 @@ Analyze reviews using AI + Machine Learning
 """, unsafe_allow_html=True)
 
 st.write("Analyze reviews using AI + Machine Learning")
-st.markdown('<div class="glass-card">', unsafe_allow_html=True)
+
 col1, col2, col3 = st.columns(3)
 
 col1.metric("Model", "Logistic Regression")
 col2.metric("Dataset", "IMDB 50K")
 col3.metric("Accuracy", "89%")
-st.markdown('</div>', unsafe_allow_html=True)
+
 
 # ---------------- SIDEBAR ----------------
 
