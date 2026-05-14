@@ -8,12 +8,12 @@ import nltk
 import pandas as pd
 import plotly.express as px
 
-
 from collections import Counter
 from nltk.corpus import stopwords
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
+# ---------------- NLTK ----------------
 nltk.download('stopwords')
 
 # ---------------- PAGE CONFIG ----------------
@@ -31,7 +31,7 @@ vectorizer = pickle.load(open("vectorizer.pkl", "rb"))
 if "history" not in st.session_state:
     st.session_state.history = []
 
-# ---------------- TEXT CLEANING ----------------
+# ---------------- CLEAN TEXT ----------------
 def clean_text(text):
 
     text = re.sub(r'[^a-zA-Z]', ' ', text)
@@ -49,7 +49,7 @@ def clean_text(text):
 
     words = [word for word in words if word not in stop_words]
 
-    # Negation handling
+    # Negation Handling
     processed_words = []
 
     i = 0
@@ -70,217 +70,122 @@ def clean_text(text):
 
     return " ".join(processed_words)
 
+# ---------------- CUSTOM CSS ----------------
 st.markdown("""
 <style>
 
-/* ---------------- MAIN APP ---------------- */
-
-.stApp {
+/* Main App */
+.stApp{
     background: linear-gradient(
         135deg,
         #0f172a,
         #1e3a5f,
         #0f172a
     );
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
-    padding-bottom: 80px;
+    color:white;
+    font-family:'Segoe UI',sans-serif;
+    padding-bottom:80px;
 }
 
-/* ---------------- SIDEBAR ---------------- */
-
-section[data-testid="stSidebar"] {
-    background: rgba(15, 23, 42, 0.95);
-    border-right: 1px solid rgba(255,255,255,0.1);
+/* Sidebar */
+section[data-testid="stSidebar"]{
+    background:rgba(15,23,42,0.95);
+    border-right:1px solid rgba(255,255,255,0.1);
 }
 
-/* ---------------- TITLE ---------------- */
-
-h1 {
-    text-align: center;
-    color: #ffffff;
-    font-size: 58px !important;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
+/* Title */
+.main-title{
+    text-align:center;
+    font-size:60px;
+    font-weight:800;
+    color:white;
+    margin-top:10px;
 
     text-shadow:
-        0 0 6px rgba(0,198,255,0.45),
-        0 0 12px rgba(0,114,255,0.25);
-
-    animation: titleGlow 3s ease-in-out infinite alternate;
-}
-@keyframes titleGlow {
-
-    from {
-        text-shadow:
-            0 0 6px rgba(0,198,255,0.35),
-            0 0 12px rgba(0,114,255,0.20);
-    }
-
-    to {
-        text-shadow:
-            0 0 10px rgba(0,198,255,0.55),
-            0 0 18px rgba(0,114,255,0.35);
-    }
-}
-/* ---------------- SUBTEXT ---------------- */
-
-.subtext {
-    text-align: center;
-    font-size: 20px;
-    color: #d1d5db;
-    margin-bottom: 40px;
+        0 0 10px rgba(0,198,255,0.45),
+        0 0 18px rgba(0,114,255,0.35);
 }
 
-/* ---------------- GLASS CARD ---------------- */
-
-.glass-card {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(14px);
-    border-radius: 22px;
-    padding: 25px;
-    margin-top: 25px;
-    border: 1px solid rgba(255,255,255,0.12);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+/* Subtitle */
+.subtext{
+    text-align:center;
+    font-size:20px;
+    color:#d1d5db;
+    margin-bottom:35px;
 }
 
-/* ---------------- TEXT AREA ---------------- */
-
-textarea {
-    background-color: rgba(0,0,0,0.45) !important;
-    color: white !important;
-    border-radius: 18px !important;
-    border: 1px solid rgba(255,255,255,0.12) !important;
-    font-size: 18px !important;
+/* Text Area */
+textarea{
+    background-color:rgba(0,0,0,0.45)!important;
+    color:white!important;
+    border-radius:18px!important;
+    border:1px solid rgba(255,255,255,0.1)!important;
+    font-size:18px!important;
 }
 
-/* ---------------- BUTTON ---------------- */
+/* Buttons */
+.stButton > button{
+    width:100%;
+    border:none;
+    border-radius:16px;
+    height:60px;
+    font-size:20px;
+    font-weight:bold;
+    color:white;
 
-.stButton > button {
-    width: 100%;
-    border-radius: 16px;
-    height: 60px;
-    border: none;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(
+    background:linear-gradient(
         90deg,
         #00c6ff,
         #0072ff
     );
-    transition: 0.3s ease;
-    box-shadow: 0 6px 18px rgba(0,114,255,0.4);
+
+    box-shadow:0 6px 18px rgba(0,114,255,0.4);
+    transition:0.3s ease;
 }
 
-.stButton > button:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 25px rgba(0,198,255,0.7);
+.stButton > button:hover{
+    transform:scale(1.03);
+    box-shadow:0 8px 25px rgba(0,198,255,0.7);
 }
 
-/* ---------------- RESULT BOX ---------------- */
-
-.result-box {
-
-    padding: 35px;
-
-    border-radius: 28px;
-
-    margin-top: 30px;
-
-    color: white;
-
-    text-align: center;
-
-    animation: fadeIn 0.7s ease-in-out;
-
-    backdrop-filter: blur(18px);
-
-    border: 1px solid rgba(255,255,255,0.12);
-
-    box-shadow: 0 10px 35px rgba(0,0,0,0.35);
-
-    transition: 0.4s ease;
+/* Metrics */
+[data-testid="metric-container"]{
+    background:rgba(255,255,255,0.07);
+    border-radius:18px;
+    padding:18px;
+    border:1px solid rgba(255,255,255,0.08);
 }
 
-.result-box:hover {
+/* Footer */
+.footer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
 
-    transform: translateY(-4px);
+    background:rgba(15,23,42,0.95);
 
-    box-shadow: 0 14px 45px rgba(0,0,0,0.45);
+    border-top:1px solid rgba(255,255,255,0.08);
+
+    text-align:center;
+
+    padding:12px;
+
+    color:#d1d5db;
+
+    font-size:15px;
+
+    z-index:999;
 }
 
-.result-box h1 {
-
-    text-shadow:
-        0 0 12px rgba(255,255,255,0.25);
-
-    letter-spacing: 1px;
+/* Scrollbar */
+::-webkit-scrollbar{
+    width:8px;
 }
 
-/* ---------------- ANIMATION ---------------- */
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(18px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0px);
-    }
-}
-
-/* ---------------- METRICS ---------------- */
-
-[data-testid="metric-container"] {
-    background: rgba(255,255,255,0.07);
-    border-radius: 18px;
-    padding: 18px;
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-/* ---------------- FOOTER ---------------- */
-
-.footer {
-
-    position: fixed;
-
-    bottom: 0;
-
-    left: 0;
-
-    width: 100%;
-
-    background: rgba(15, 23, 42, 0.95);
-
-    backdrop-filter: blur(10px);
-
-    border-top: 1px solid rgba(255,255,255,0.08);
-
-    text-align: center;
-
-    padding: 12px;
-
-    color: #d1d5db;
-
-    font-size: 15px;
-
-    z-index: 999;
-
-    box-shadow: 0 -4px 15px rgba(0,0,0,0.25);
-}
-
-/* ---------------- SCROLLBAR ---------------- */
-
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #00c6ff;
-    border-radius: 10px;
+::-webkit-scrollbar-thumb{
+    background:#00c6ff;
+    border-radius:10px;
 }
 
 </style>
@@ -288,21 +193,21 @@ textarea {
 
 # ---------------- TITLE ----------------
 st.markdown("""
-<h1>🎭 AI Sentiment Analysis System</h1>
+<h1 class="main-title">🎭 AI Sentiment Analysis System</h1>
+
 <p class="subtext">
 Analyze reviews using AI + Machine Learning
 </p>
 """, unsafe_allow_html=True)
 
+# ---------------- METRICS ----------------
 col1, col2, col3 = st.columns(3)
 
 col1.metric("Model", "Logistic Regression")
 col2.metric("Dataset", "IMDB 50K")
 col3.metric("Accuracy", "89%")
 
-
 # ---------------- SIDEBAR ----------------
-
 st.sidebar.markdown("""
 <h2 style='
 color:white;
@@ -318,6 +223,7 @@ st.sidebar.image(
     "https://cdn-icons-png.flaticon.com/512/4712/4712027.png",
     width=80
 )
+
 voice_option = st.sidebar.checkbox("Enable Voice Input")
 
 uploaded_file = st.sidebar.file_uploader(
@@ -326,7 +232,6 @@ uploaded_file = st.sidebar.file_uploader(
 )
 
 # ---------------- VOICE INPUT ----------------
-
 review = ""
 
 if voice_option:
@@ -382,7 +287,7 @@ review = st.text_area(
     height=150
 )
 
-# ---------------- PREDICT ----------------
+# ---------------- ANALYZE ----------------
 if st.button("🚀 Analyze Sentiment"):
 
     if review.strip() != "":
@@ -391,7 +296,7 @@ if st.button("🚀 Analyze Sentiment"):
 
             cleaned_review = clean_text(review)
 
-            st.write("Cleaned Text:", cleaned_review)
+            st.info(f"🧹 Cleaned Text: {cleaned_review}")
 
             vector_input = vectorizer.transform([cleaned_review])
 
@@ -404,55 +309,74 @@ if st.button("🚀 Analyze Sentiment"):
             # Save History
             st.session_state.history.append(prediction)
 
-            # Positive Result
-            # Positive Result
+            # ---------------- POSITIVE RESULT ----------------
             if prediction == "positive":
-                st.markdown(f"""
-                <div style="
-                    background: linear-gradient(135deg,#16a34a,#14532d);
-                    padding:30px;
-                    border-radius:20px;
-                    text-align:center;
-                    margin-top:20px;
-                    box-shadow:0 8px 25px rgba(0,0,0,0.3);
-                ">
 
-                    <h1 style="color:white; font-size:52px;">
-                       😊 Positive Sentiment
+                st.markdown(f"""
+                <div style='
+                    background: linear-gradient(135deg,#16a34a,#14532d);
+                    padding:35px;
+                    border-radius:25px;
+                    text-align:center;
+                    margin-top:25px;
+                    box-shadow:0 10px 35px rgba(0,0,0,0.35);
+                '>
+
+                    <h1 style='
+                        color:white;
+                        font-size:52px;
+                        text-shadow:0 0 12px rgba(255,255,255,0.3);
+                    '>
+                        😊 Positive Sentiment
                     </h1>
 
-                    <h2 style="color:white; font-size:34px;">
-                       Confidence: {confidence:.2f}%
+                    <h2 style='
+                        color:white;
+                        font-size:34px;
+                        margin-top:15px;
+                    '>
+                        Confidence: {confidence:.2f}%
                     </h2>
 
                 </div>
                 """, unsafe_allow_html=True)
 
+            # ---------------- NEGATIVE RESULT ----------------
             else:
 
                 st.markdown(f"""
-                <div style="
-                   background: linear-gradient(135deg,#dc2626,#7f1d1d);
-                   padding:30px;
-                   border-radius:20px;
-                   text-align:center;
-                   margin-top:20px;
-                   box-shadow:0 8px 25px rgba(0,0,0,0.3);
-                ">
-                   <h1 style="color:white;">
-                      😠 Negative Sentiment
-                   </h1>
+                <div style='
+                    background: linear-gradient(135deg,#dc2626,#7f1d1d);
+                    padding:35px;
+                    border-radius:25px;
+                    text-align:center;
+                    margin-top:25px;
+                    box-shadow:0 10px 35px rgba(0,0,0,0.35);
+                '>
 
-                   <h2 style="color:white;">
-                       Confidence: {confidence:.2f}%
+                    <h1 style='
+                        color:white;
+                        font-size:52px;
+                        text-shadow:0 0 12px rgba(255,255,255,0.3);
+                    '>
+                        😠 Negative Sentiment
+                    </h1>
+
+                    <h2 style='
+                        color:white;
+                        font-size:34px;
+                        margin-top:15px;
+                    '>
+                        Confidence: {confidence:.2f}%
                     </h2>
+
                 </div>
                 """, unsafe_allow_html=True)
-                
-            # Progress Bar
+
+            # ---------------- PROGRESS BAR ----------------
             st.progress(int(confidence))
 
-            # Word Cloud
+            # ---------------- WORD CLOUD ----------------
             st.subheader("☁ Word Cloud")
 
             wordcloud = WordCloud(
@@ -490,7 +414,7 @@ if len(st.session_state.history) > 0:
 
     st.plotly_chart(fig)
 
-# ---------------- CSV UPLOAD ----------------
+# ---------------- CSV ANALYSIS ----------------
 if uploaded_file is not None:
 
     st.subheader("📁 CSV Analysis")
@@ -525,15 +449,10 @@ if uploaded_file is not None:
             "predictions.csv",
             "text/csv"
         )
-        st.markdown("""
-<hr>
-<center>
-Built with ❤️ using Python, NLP & Machine Learning
-</center>
-""", unsafe_allow_html=True)
-        
+
+# ---------------- FOOTER ----------------
 st.markdown("""
 <div class="footer">
-    🚀 Built with Python • NLP • Streamlit • Machine Learning
+🚀 Built with Python • NLP • Streamlit • Machine Learning
 </div>
-""", unsafe_allow_html=True)     
+""", unsafe_allow_html=True)
