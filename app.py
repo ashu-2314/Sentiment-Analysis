@@ -418,11 +418,11 @@ if st.button("🚀 Analyze Sentiment"):
                     box-shadow:0 8px 25px rgba(0,0,0,0.3);
                 ">
                     <h1 style="color:white;">
-                    😊 Positive Sentiment
+                       😊 Positive Sentiment
                     </h1>
 
                     <h2 style="color:white;">
-                         Confidence: {confidence:.2f}%
+                        Confidence: {confidence:.2f}%
                     </h2>
                 </div>
                 """, unsafe_allow_html=True)
