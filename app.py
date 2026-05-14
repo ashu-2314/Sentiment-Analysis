@@ -311,67 +311,23 @@ if st.button("🚀 Analyze Sentiment"):
 
             # ---------------- POSITIVE RESULT ----------------
             if prediction == "positive":
-
-                st.markdown(f"""
-                <div style='
-                    background: linear-gradient(135deg,#16a34a,#14532d);
-                    padding:35px;
-                    border-radius:25px;
-                    text-align:center;
-                    margin-top:25px;
-                    box-shadow:0 10px 35px rgba(0,0,0,0.35);
-                '>
-
-                    <h1 style='
-                        color:white;
-                        font-size:52px;
-                        text-shadow:0 0 12px rgba(255,255,255,0.3);
-                    '>
-                        😊 Positive Sentiment
-                    </h1>
-
-                    <h2 style='
-                        color:white;
-                        font-size:34px;
-                        margin-top:15px;
-                    '>
-                        Confidence: {confidence:.2f}%
-                    </h2>
-
+                html_code = f"""
+                <div style="background:linear-gradient(135deg,#16a34a,#14532d);padding:35px;border-radius:25px;text-align:center;margin-top:25px;box-shadow:0 10px 35px rgba(0,0,0,0.35);">
+                    <h1 style="color:white;font-size:52px;text-shadow:0 0 12px rgba(255,255,255,0.3);margin:0;">😊 Positive Sentiment</h1>
+                    <h2 style="color:white;font-size:34px;margin-top:15px;margin-bottom:0;">Confidence: {confidence:.2f}%</h2>
                 </div>
-                """, unsafe_allow_html=True)
+                """
+                st.markdown(html_code, unsafe_allow_html=True)
 
             # ---------------- NEGATIVE RESULT ----------------
             else:
-
-                st.markdown(f"""
-                <div style='
-                    background: linear-gradient(135deg,#dc2626,#7f1d1d);
-                    padding:35px;
-                    border-radius:25px;
-                    text-align:center;
-                    margin-top:25px;
-                    box-shadow:0 10px 35px rgba(0,0,0,0.35);
-                '>
-
-                    <h1 style='
-                        color:white;
-                        font-size:52px;
-                        text-shadow:0 0 12px rgba(255,255,255,0.3);
-                    '>
-                        😠 Negative Sentiment
-                    </h1>
-
-                    <h2 style='
-                        color:white;
-                        font-size:34px;
-                        margin-top:15px;
-                    '>
-                        Confidence: {confidence:.2f}%
-                    </h2>
-
+                html_code = f"""
+                <div style="background:linear-gradient(135deg,#dc2626,#7f1d1d);padding:35px;border-radius:25px;text-align:center;margin-top:25px;box-shadow:0 10px 35px rgba(0,0,0,0.35);">
+                    <h1 style="color:white;font-size:52px;text-shadow:0 0 12px rgba(255,255,255,0.3);margin:0;">😠 Negative Sentiment</h1>
+                    <h2 style="color:white;font-size:34px;margin-top:15px;margin-bottom:0;">Confidence: {confidence:.2f}%</h2>
                 </div>
-                """, unsafe_allow_html=True)
+                """
+                st.markdown(html_code, unsafe_allow_html=True)
 
             # ---------------- PROGRESS BAR ----------------
             st.progress(int(confidence))
