@@ -84,6 +84,7 @@ st.markdown("""
     );
     color: white;
     font-family: 'Segoe UI', sans-serif;
+    padding-bottom: 80px;
 }
 
 /* ---------------- SIDEBAR ---------------- */
@@ -100,10 +101,29 @@ h1 {
     color: #ffffff;
     font-size: 58px !important;
     font-weight: 700;
-    text-shadow: 0px 0px 25px rgba(0,198,255,0.9);
+    letter-spacing: 1px;
     margin-bottom: 10px;
-}
 
+    text-shadow:
+        0 0 6px rgba(0,198,255,0.45),
+        0 0 12px rgba(0,114,255,0.25);
+
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+@keyframes titleGlow {
+
+    from {
+        text-shadow:
+            0 0 6px rgba(0,198,255,0.35),
+            0 0 12px rgba(0,114,255,0.20);
+    }
+
+    to {
+        text-shadow:
+            0 0 10px rgba(0,198,255,0.55),
+            0 0 18px rgba(0,114,255,0.35);
+    }
+}
 /* ---------------- SUBTEXT ---------------- */
 
 .subtext {
@@ -195,11 +215,32 @@ textarea {
 /* ---------------- FOOTER ---------------- */
 
 .footer {
+
+    position: fixed;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    background: rgba(15, 23, 42, 0.95);
+
+    backdrop-filter: blur(10px);
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+
     text-align: center;
-    margin-top: 60px;
-    padding: 20px;
+
+    padding: 12px;
+
     color: #d1d5db;
-    font-size: 16px;
+
+    font-size: 15px;
+
+    z-index: 999;
+
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.25);
 }
 
 /* ---------------- SCROLLBAR ---------------- */
@@ -234,7 +275,18 @@ col3.metric("Accuracy", "89%")
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------------- SIDEBAR ----------------
-st.sidebar.title("⚙ Features")
+
+st.sidebar.markdown("""
+<h2 style='
+color:white;
+text-align:center;
+margin-top:10px;
+margin-bottom:20px;
+'>
+⚙ Features
+</h2>
+""", unsafe_allow_html=True)
+
 st.sidebar.image(
     "https://cdn-icons-png.flaticon.com/512/4712/4712027.png",
     width=80
@@ -247,7 +299,7 @@ uploaded_file = st.sidebar.file_uploader(
 )
 
 # ---------------- VOICE INPUT ----------------
-st.markdown('<div class="glass-card">', unsafe_allow_html=True)
+
 review = ""
 
 if voice_option:
@@ -295,8 +347,6 @@ if voice_option:
         except Exception as e:
 
             st.error(f"Speech recognition failed: {e}")
-
-st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------------- TEXT AREA ----------------
 review = st.text_area(
@@ -438,7 +488,6 @@ Built with ❤️ using Python, NLP & Machine Learning
         
 st.markdown("""
 <div class="footer">
-    🚀 Built with Python, NLP, Streamlit & Machine Learning <br>
-    Designed & Developed by Ashrita
+    🚀 Built with Python • NLP • Streamlit • Machine Learning
 </div>
-""", unsafe_allow_html=True)       
+""", unsafe_allow_html=True)     
