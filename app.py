@@ -412,18 +412,18 @@ if st.button("🚀 Analyze Sentiment"):
                 <div class="result-box"
                 style="background:{bg_color}">
 
-                    <h1 style="
+                    <h1 style='
                     font-size:52px;
                     margin-bottom:15px;
                     text-shadow:0 0 18px rgba(255,255,255,0.3);
-                    ">
+                    '>
                     😊 Positive Sentiment
                     </h1>
 
-                    <h2 style="
+                    <h2 style='
                     font-size:34px;
                     margin-top:15px;
-                    ">
+                    '>
                     Confidence: {confidence:.2f}%
                     </h2>
 
@@ -439,18 +439,18 @@ if st.button("🚀 Analyze Sentiment"):
                 <div class="result-box"
                 style="background:{bg_color}">
 
-                    <h1 style="
+                    <h1 style='
                     font-size:52px;
                     margin-bottom:15px;
                     text-shadow:0 0 18px rgba(255,255,255,0.3);
-                    ">
+                    '>
                     😠 Negative Sentiment
                     </h1>
 
-                    <h2 style="
+                    <h2 style='
                     font-size:34px;
                     margin-top:15px;
-                    ">
+                    '>
                     Confidence: {confidence:.2f}%
                     </h2>
  
