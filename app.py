@@ -406,7 +406,6 @@ if st.button("🚀 Analyze Sentiment"):
 
             # Positive Result
             if prediction == "positive":
-                st.success("😊 Positive Sentiment")
 
                 st.markdown(f"""
                 <div style="
@@ -428,7 +427,6 @@ if st.button("🚀 Analyze Sentiment"):
                 """, unsafe_allow_html=True)
 
             else:
-                st.error("😠 Negative Sentiment")
 
                 st.markdown(f"""
                 <div style="
