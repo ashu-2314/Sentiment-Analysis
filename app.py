@@ -405,8 +405,8 @@ if st.button("🚀 Analyze Sentiment"):
             st.session_state.history.append(prediction)
 
             # Positive Result
+            # Positive Result
             if prediction == "positive":
-
                 st.markdown(f"""
                 <div style="
                     background: linear-gradient(135deg,#16a34a,#14532d);
@@ -416,13 +416,15 @@ if st.button("🚀 Analyze Sentiment"):
                     margin-top:20px;
                     box-shadow:0 8px 25px rgba(0,0,0,0.3);
                 ">
-                    <h1 style="color:white;">
+
+                    <h1 style="color:white; font-size:52px;">
                        😊 Positive Sentiment
                     </h1>
 
-                    <h2 style="color:white;">
-                        Confidence: {confidence:.2f}%
+                    <h2 style="color:white; font-size:34px;">
+                       Confidence: {confidence:.2f}%
                     </h2>
+
                 </div>
                 """, unsafe_allow_html=True)
 
