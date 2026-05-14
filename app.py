@@ -265,8 +265,6 @@ Analyze reviews using AI + Machine Learning
 </p>
 """, unsafe_allow_html=True)
 
-st.write("Analyze reviews using AI + Machine Learning")
-
 col1, col2, col3 = st.columns(3)
 
 col1.metric("Model", "Logistic Regression")
