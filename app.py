@@ -406,13 +406,7 @@ if st.button("🚀 Analyze Sentiment"):
 
             # Positive Result
             if prediction == "positive":
-                bg_color = """
-                linear-gradient(
-                135deg,
-                rgba(22,163,74,0.95),
-                rgba(21,128,61,0.88)
-                )
-                """
+                bg_color = " linear-gradient(135deg,rgba(22,163,74,0.95),rgba(21,128,61,0.88))"
 
                 st.markdown(f"""
                 <div class="result-box"
@@ -439,13 +433,7 @@ if st.button("🚀 Analyze Sentiment"):
             # Negative Result
             else:
 
-                bg_color = """
-                linear-gradient(
-                135deg,
-                rgba(220,38,38,0.95),
-                rgba(127,29,29,0.88)
-                )
-                """
+                bg_color = "linear-gradient(135deg,rgba(220,38,38,0.95),rgba(127,29,29,0.88))"
 
                 st.markdown(f"""
                 <div class="result-box"
